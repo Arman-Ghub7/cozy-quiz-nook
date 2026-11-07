@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Cozy Quiz Nook</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside>
+        <a class="brand" href="#" data-page="home">✦ cozy <b>quiz nook</b></a
+        ><small>YOUR SPACE</small
+        ><button data-page="home" class="nav active">⌂ Home</button
+        ><button data-page="history" class="nav">◷ Quiz history</button
+        ><button data-page="saved" class="nav">♡ Saved questions</button
+        ><button data-page="notes" class="nav">▤ My notes</button>
+        <p class="motto">A little practice,<br />a lot of progress.</p>
+      </aside>
+      <main>
+        <header id="date"></header>
+        <section id="home" class="page">
+          <div class="hero">
+            <div>
+              <small>✦ YOUR DAILY STUDY RITUAL</small>
+              <h1>Make learning<br /><i>a little more cozy.</i></h1>
+              <p>
+                A calm corner for curious minds. Pick a topic, settle in, and
+                see what you know.
+              </p>
+            </div>
+            <div class="art">
+              ☾
+              <div>▱ ▰ ▱</div>
+              <small>slow down · show up · grow</small>
+            </div>
+          </div>
+          <div class="head">
+            <div>
+              <small>PICK YOUR PATH</small>
+              <h2>What shall we explore?</h2>
+            </div>
+            <button id="more">More categories ⌄</button>
+          </div>
+          <div id="categories" class="categories"></div>
+          <section class="setup">
+            <small>MAKE IT YOURS</small>
+            <h2>Set up your session</h2>
+            <label>What would you like to learn?</label
+            ><input
+              id="topic"
+              placeholder="e.g. Python decorators, photosynthesis, World War II…"
+            />
+            <div class="fields">
+              <div>
+                <label>Number of questions</label
+                ><select id="count">
+                  <option>5</option>
+                  <option selected>10</option>
+                  <option>15</option>
+                  <option value="custom">Custom (1–50)</option></select
+                ><input
+                  id="customCount"
+                  class="hide"
+                  type="number"
+                  min="1"
+                  max="50"
+                  value="20"
+                />
+              </div>
+              <div>
+                <label>Difficulty</label
+                ><select id="difficulty">
+                  <option>Balanced</option>
+                  <option>Easy</option>
+                  <option>Medium</option>
+                  <option>Hard</option>
+                </select>
+              </div>
+              <div>
+                <label>Timer</label
+                ><select id="timed">
+                  <option value="off">No timer</option>
+                  <option value="on">Timed quiz</option>
+                </select>
+              </div>
+              <div id="timeOptions" class="hide">
+                <label>Seconds per question</label
+                ><select id="seconds">
+                  <option>15</option>
+                  <option selected>30</option>
+                  <option>45</option>
+                  <option>60</option>
+                  <option value="custom">Custom</option></select
+                ><input
+                  id="customSeconds"
+                  class="hide"
+                  type="number"
+                  min="5"
+                  max="300"
+                  value="40"
+                />
+              </div>
+            </div>
+            <label>Optional study file (TXT, MD, PDF or DOCX)</label
+            ><input id="file" type="file" accept=".txt,.md,.pdf,.docx" /><button
+              id="start"
+              class="primary"
+            >
+              Create my quiz →
+            </button>
+            <p class="fine">
+              Gemini creates fresh questions for your topic — no fixed topic
+              bank.
+            </p>
+            <p id="status" class="status">
+              Your Gemini API key stays on the server.
+            </p>
+          </section>
+        </section>
+        <section id="quiz" class="page hide">
+          <button id="leave" class="back">← Leave quiz</button
+          ><span id="clock"></span>
+          <p id="progress" class="muted"></p>
+          <div class="track"><div id="fill"></div></div>
+          <article class="question">
+            <small id="qtopic"></small><button id="save">♡ Save</button>
+            <h2 id="qtext"></h2>
+            <div id="options"></div>
+            <button id="hint" class="hint">✧ Need a hint?</button>
+            <p id="hinttext" class="hinttext hide"></p>
+            <p id="feedback" class="feedback hide"></p>
+            <button id="next" class="primary" disabled>Check answer →</button>
+          </article>
+        </section>
+        <section id="results" class="page hide">
+          <small>SESSION COMPLETE</small>
+          <h1>Look at you,<br /><i>showing up.</i></h1>
+          <p id="message"></p>
+          <div class="score">
+            <strong id="score"></strong><span id="stats"></span>
+          </div>
+          <h2>Your answer review</h2>
+          <div id="review"></div>
+          <button class="primary" onclick="showPage('home')">
+            Make another quiz →
+          </button>
+        </section>
+        <section id="history" class="page hide">
+          <small>YOUR JOURNEY</small>
+          <h1>Quiz history</h1>
+          <div id="historyList"></div>
+        </section>
+        <section id="saved" class="page hide">
+          <small>KEEP THE GOOD QUESTIONS</small>
+          <h1>Saved questions</h1>
+          <div id="savedList"></div>
+        </section>
+        <section id="notes" class="page hide">
+          <small>YOUR STUDY DESK</small>
+          <h1>My notes</h1>
+          <textarea
+            id="notes"
+            placeholder="Write a summary or something to remember…"
+          ></textarea
+          ><button id="saveNotes" class="primary">Save notes</button>
+        </section>
+        <footer>MADE FOR CURIOUS MINDS ✦</footer>
+      </main>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
